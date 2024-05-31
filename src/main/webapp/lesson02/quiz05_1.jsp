@@ -15,10 +15,11 @@
 		String calculation = request.getParameter("calculation"); 
 		int num2 = Integer.valueOf(request.getParameter("num2")); 
 		
-		int result = 0;
+		double result = 0;
 		
 		if(calculation.equals("*")){
 			result = num1 * num2;
+			calculation ="X";
 		} else if(calculation.equals("/")){
 			result = num1 / num2;
 		} else if(calculation.equals("+")){

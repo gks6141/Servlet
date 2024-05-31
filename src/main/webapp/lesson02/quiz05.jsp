@@ -14,15 +14,15 @@
 		<div class="container">
 			<h1>사칙연산</h1>
 			<div class="d-flex">
-				<input type="text" name="num1">
-				<select name="calculation">
+				<input type="text" name="num1" class="form-control col-3 mr-2">
+				<select name="calculation" class="form-control mr-2 col-2">
 					<option>*</option>
 					<option>/</option>
 					<option>+</option>
 					<option>-</option>
 				</select>
-				<input type="text" name="num2">
-				<button type="submit" class="btn btn-info">계산하기</button>
+				<input type="text" name="num2" class="form-control mr-2 col-3">
+				<button type="submit" class="btn btn-info" class="col-2">계산하기</button>
 			</div>
 		</div>
 	</form>

@@ -29,7 +29,7 @@
     list.add(map);
     
     String remenu = request.getParameter("menu");
-    String point1 = request.getParameter("point");
+    String point1 = request.getParameter("point1");
     
 	%>
 	
@@ -47,7 +47,6 @@
 			<tbody>
 			
 	<%
-	String result = "";
 	for(Map<String, Object> item : list){
 		if(item.get("menu").equals(remenu)){
 			if(point1 != null){
@@ -60,7 +59,7 @@
 			</tr>
 	<%		
 				}
-			}
+			} else {
 	%>
 	<tr>
 		<td><%=item.get("name") %></td>
@@ -70,6 +69,7 @@
 	<%	
 				
 			
+			}
 		}
 	}
 	%>

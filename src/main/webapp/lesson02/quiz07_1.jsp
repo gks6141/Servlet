@@ -29,11 +29,12 @@
     list.add(map);
     
     String remenu = request.getParameter("menu");
+    
+    //4점 ㅇ하 제외  체크됨: "true" 체크안됨:null
     String point1 = request.getParameter("point1");
+    boolean exclude = point1 != null; // 체크됨 --> true 4점 이하 제외 (exclude 제외할 것)
     
 	%>
-	
-	
 	<div class="container">
 		<h1 class="text-center">검색 결과</h1>
 		<table class="table text-center">
@@ -48,9 +49,11 @@
 			
 	<%
 	for(Map<String, Object> item : list){
-		if(item.get("menu").equals(remenu)){
-			if(point1 != null){
-				if((double)item.get("point") > 4.0){
+		if(remenu.equals(item.get("menu"))){
+			// skip 조건이 체크되어 있고 스팁되어야할때 skip(continue)
+			if(exclude && (double)item.get("point") <= 4.0){
+				continue;//안 뿌리고 skip
+			}
 	%>
 			<tr>
 				<td><%=item.get("name") %></td>
@@ -58,18 +61,7 @@
 				<td><%=item.get("point") %></td>
 			</tr>
 	<%		
-				}
-			} else {
-	%>
-	<tr>
-		<td><%=item.get("name") %></td>
-		<td><%=item.get("menu") %></td>
-		<td><%=item.get("point") %></td>
-	</tr>
-	<%	
-				
-			
-			}
+		
 		}
 	}
 	%>

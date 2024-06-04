@@ -101,7 +101,12 @@
 	    musicInfo.put("composer", "아이유,이종훈,이채규");
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
+	    
+		String singTitle = request.getParameter("singTitle");
+		String singId = request.getParameter("singId");
 	%>
+	
+
 	
 	<div class="container">
 		<header>
@@ -112,7 +117,9 @@
 				<div class="col-10">
 					<form method="post" action="/lesson02/quiz10_1.jsp">
 						<div class="input-group">
-							<input type="text" class="form-control col-6" name="singTitle">
+							<input type="text" class="form-control col-6" name="singTitle" value="<%if(singTitle != null){
+								out.print(singTitle);	
+							}%>">
 							<div class="input-group-append">
 				    			<button class="btn btn-info" type="submit">검색</button>
 				    		</div>
@@ -133,10 +140,7 @@
 		</nav>
 		
 		<section id="contents" >
-			<div id="box" class="d-flex">
 <%
-	String singTitle = request.getParameter("singTitle");
-	String singId = request.getParameter("singId");
     Map<String, Object> target = null;
 	for(Map<String, Object> music : musicList){ 
 		if(singTitle == null && Integer.valueOf(singId) == (int)music.get("id")){
@@ -149,7 +153,9 @@
 		}
 			
 	}
-%>
+	if(target != null){
+%>	
+			<div id="box" class="d-flex">
 				<img width="200px" src="<%=target.get("thumbnail") %>" alt="이미지" class="m-3">
 				<div class="mt-3">
 					<h1><%=target.get("title") %></h1>
@@ -176,6 +182,11 @@
 		<h4>가사</h4>
 		<hr>
 		<p>가사 정보 없음</p>
+		<% 
+			} else {
+				out.print("검색 결과 없음");
+			}
+		%>
 		</section>
 		
 		<footer>

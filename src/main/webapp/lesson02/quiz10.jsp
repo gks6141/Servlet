@@ -11,9 +11,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 <style>
-	#wrap{weight:1000px;}
-	#search{padding-left: -10px;}
-	header {height:80px;}
+	#wrap{width:1000px;}
+	header {height:100px;}
 	nav {height:80px;}
 	.nav-link{ color: black; font-weight: bold;}
 	#box{width:100%; height:250px; border:2px solid green;"}
@@ -106,14 +105,18 @@
 
 	<div id="wrap" class="container">
 		<header>
-			<div class="d-flex">
-				<div class="d-flex align-items-center">
-					<h3 class="text-success mr-5">Melong</h3>
+			<div class="d-flex align-items-center">
+				<div class="col-2">
+					<h3 class="text-success">Melong</h3>
 				</div>
-				<div class="d-flex align-items-center">
-					<form method="post" action="/lesson02/quiz10_1.jsp" class="d-flex ">
-						<input width="500px" type="text" class="form-control col-9" name="singTitle">
-				    	<button id="search "class="btn btn-info col-3" type="submit">검색</button>
+				<div class="col-10">
+					<form method="post" action="/lesson02/quiz10_1.jsp" class="d-flex">
+						<div class="input-group">
+							<input type="text" class="form-control col-6" name="singTitle">
+							<div class="input-group-append">
+				    			<button class="btn btn-info" type="submit">검색</button>
+				    		</div>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -133,7 +136,7 @@
 			<div id="box" class="d-flex">
 				<img width="200px" src="<%=artistInfo.get("photo") %>" alt="이미지" class="m-3">
 				<div class="mt-3">
-					<h3><%=artistInfo.get("name") %></h3>
+					<h3 class="font-weight-bold"><%=artistInfo.get("name") %></h3>
 					<h4><%=artistInfo.get("agency") %></h4>
 					<h4><%=artistInfo.get("debute") %> 데뷔</h4>
 				</div>
@@ -156,7 +159,7 @@
 %>				
 				<tr>
 					<td><%=music.get("id") %></td>
-					<td><a href="/lesson02/quiz10_1.jsp?id=<%=music.get("id")%>"><%=music.get("title") %></a></td>
+					<td><a href="/lesson02/quiz10_1.jsp?singId=<%=music.get("id")%>"><%=music.get("title") %></a></td>
 					<td><%=music.get("album") %></td>
 				</tr>
 <%

@@ -65,7 +65,7 @@
 	</header>
 	<nav class="bg-danger d-flex align-items-center">
 		<ul class="nav nav-fill w-100">
-			<li class="nav-item"><a href="/lesson02/quiz09.jsp?category=전체" class="nav-link text-light">전체</a></li>
+			<li class="nav-item"><a href="/lesson02/quiz09.jsp" class="nav-link text-light">전체</a></li>
 			<li class="nav-item"><a href="/lesson02/quiz09.jsp?category=지상파" class="nav-link text-light">지상파</a></li>
 			<li class="nav-item"><a href="/lesson02/quiz09.jsp?category=드라마" class="nav-link text-light">드라마</a></li>
 			<li class="nav-item"><a href="/lesson02/quiz09.jsp?category=예능" class="nav-link text-light">예능</a></li>
@@ -86,7 +86,7 @@
 <% 
 	String category = request.getParameter("category");
 	for(Map<String, String> channel : list){
-		if(category == null || category.equals("전체")){
+		if(category == null || category.equals(channel.get("category"))){
 %>
 			<tr>
 				<td><%=channel.get("ch") %></td>
@@ -94,16 +94,6 @@
 				<td><%=channel.get("category") %></td>
 			</tr>
 <%	
-			continue;
-		} else if(category.equals(channel.get("category"))){
-		
-%>
-			<tr>
-				<td><%=channel.get("ch") %></td>
-				<td><%=channel.get("name") %></td>
-				<td><%=channel.get("category") %></td>
-			</tr>
-<%			
 			continue;
 		}
 	}

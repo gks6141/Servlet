@@ -11,17 +11,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 <style>
-	#wrap{weight:1000px;}
-	#search{padding-left: -10px;}
-	header {height:80px;}
+	header {height:100px;}
 	nav {height:80px;}
 	.nav-link{ color: black; font-weight: bold;}
 	#box{width:100%; height:250px; border:2px solid green;"}
 	#contents {min-height:250px;}
 	#list {min-height:150px;}
 	footer {height:80px;}
-
 </style>
+
+
 </head>
 <body>
 	<%
@@ -106,15 +105,19 @@
 	
 	<div class="container">
 		<header>
-			<div class="d-flex">
-				<div class="d-flex align-items-center">
-					<h3 class="text-success mr-5">Melong</h3>
+			<div class="d-flex align-items-center">
+				<div class="col-2">
+					<h3 class="text-success">Melong</h3>
 				</div>
-				<div class="d-flex align-items-center">
-					<form method="post" action="/lesson02/quiz10_1.jsp" class="d-flex ">
-						<input width="500px" type="text" class="form-control col-9" name="singTitle">
-				    	<button id="search "class="btn btn-info col-3" type="submit">검색</button>
-					</form>
+				<div class="col-10">
+					<form method="post" action="/lesson02/quiz10_1.jsp">
+						<div class="input-group">
+							<input type="text" class="form-control col-6" name="singTitle">
+							<div class="input-group-append">
+				    			<button class="btn btn-info" type="submit">검색</button>
+				    		</div>
+				    	</div>
+			    	</form>
 				</div>
 			</div>
 		</header>
@@ -133,38 +136,43 @@
 			<div id="box" class="d-flex">
 <%
 	String singTitle = request.getParameter("singTitle");
-    String ID = request.getParameter("id");
+	String singId = request.getParameter("singId");
+    Map<String, Object> target = null;
 	for(Map<String, Object> music : musicList){ 
-		if(singTitle.equals(music.get("title"))){
+		if(singTitle == null && Integer.valueOf(singId) == (int)music.get("id")){
+			target= music;
+			break;
+		} 
+		if(singId == null && singTitle.equals(music.get("title"))){
+			target= music;
+			break;
+		}
+			
+	}
 %>
-				<img width="200px" src="<%=music.get("thumbnail") %>" alt="이미지" class="m-3">
+				<img width="200px" src="<%=target.get("thumbnail") %>" alt="이미지" class="m-3">
 				<div class="mt-3">
-					<h1><%=music.get("title") %></h1>
-					<h5 class="text-success"><%=music.get("singer") %></h5>
+					<h1><%=target.get("title") %></h1>
+					<h5 class="text-success"><%=target.get("singer") %></h5>
 					<div class="d-flex">
-						<div class="mr-3">
+						<div class="mr-3 font-1 text-secondary">
 							<small>앨범<br></small>
 							<small>재생시간<br></small>
 							<small>작곡가<br></small>
 							<small>작사가</small>
 						</div>
-						<div >
-							<small><%=music.get("album") %><br></small>
-							<small><%=music.get("time") %><br></small>
-							<small><%=music.get("composer") %><br></small>
-							<small><%=music.get("lyricist") %></small>
+						<div class="text-secondary">
+							<small><%=target.get("album") %><br></small>
+							<small><%=(int)target.get("time")/60 %>:<%=(int)target.get("time")%60 %> <br></small>
+							<small><%=target.get("composer") %><br></small>
+							<small><%=target.get("lyricist") %></small>
 						</div>
 					</div>
 				</div>
-<%
-		break;
-		}
-	}
-%>
 			</div>
 		</section>
 		
-		<section id="list">
+		<section id="list" class="mt-3">
 		<h4>가사</h4>
 		<hr>
 		<p>가사 정보 없음</p>
@@ -177,6 +185,5 @@
 			</div>
 		</footer>	
 	</div>
-	
 </body>
 </html>

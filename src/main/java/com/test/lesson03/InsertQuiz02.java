@@ -21,8 +21,8 @@ public class InsertQuiz02 extends HttpServlet {
 		MysqlService ms = MysqlService.getInstance();
 		ms.connect();
 		
-		String insertQuery="insert into`bookmark`\r\n"
-				+ "(`name`,`url`)\r\n"
+		String insertQuery="insert into`bookmark`"
+				+ "(`name`,`url`)"
 				+ "values"
 				+ "('"+name+"','"+url+"')";
 		

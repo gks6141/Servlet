@@ -1,5 +1,8 @@
 package com.test.lesson03;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +14,19 @@ import com.test.common.MysqlService;
 public class SelectQuiz03 extends HttpServlet{
 	
 	@Override
-	public void doGet(HttpServletRequest requset, HttpServletResponse response) {
+	public void doGet(HttpServletRequest requset, HttpServletResponse response) throws IOException {
 		
 		MysqlService ms = MysqlService.getInstance();
 		ms.connect();
 		
 		//
 		String SelectQuery="";
-		
+		try {
+			ms.select(SelectQuery);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		ms.disconnect();
 		
